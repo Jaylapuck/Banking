@@ -9,186 +9,178 @@ namespace Banking
 {
     class Program
     {
+        public static Savings savings = new Savings(5, 0.05);
+        public static Chequings chequings = new Chequings(5, 0.5);
+        public static GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
         static void Main(string[] args)
         {
 
-            Savings savings = new Savings(5, 0.05);
-            Chequings chequings = new Chequings(5, 0.5);
-            GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
             string option = null;
-            //Bank Menu
-            if (option != "Q")
+            BankMenu(savings, chequings, globalSavingsAccount);
+        }
+
+        public static void BankMenu(Savings savings, Chequings chequings, GlobalSavingsAccount globalSavingsAccount)
+        {
+            string option = null;
+            do
             {
-                do
-                {
-                    Console.WriteLine("Select the Type of Account");
-                    Console.WriteLine("A: Savings \n" +
-                        "B: Checking \n" +
-                        "C: GlobalSavings \n" +
-                        "Q: Exit \n");
-                    option = Console.ReadLine();
+                Console.WriteLine("Select the Type of Account");
+                Console.WriteLine("A: Savings \n" +
+                    "B: Checking \n" +
+                    "C: GlobalSavings \n" +
+                    "Q: Exit \n");
+                option = Console.ReadLine();
+                option = option.ToUpper();
 
-                }
-                while (option != "A" && option != "B" && option != "C" && option != "Q");
+            }
+            while (option != "A" && option != "B" && option != "C" && option != "Q");
 
-                switch (option)
-                {
-                    case "A":
-                        do
-                        {
-                            Console.WriteLine("Select action to do");
-                            Console.WriteLine("A: Deposit \n" +
-                               "B: Withdrawl \n" +
-                               "C: Close + Report \n" +
-                               "R: Return to Bank Menu \n");
-                            option = Console.ReadLine();
-                            switch (option.ToUpper())
-                            {
-                                case "A":
+            switch (option.ToUpper())
+            {
+                case "A":
+                    SavingsMenu();
+                    break;
+                case "B":
+                    CheckingMenu();
+                    break;
+                case "C":
+                    GlobalSavingsMenu();
+                    break;
+                case "Q":
 
-                                    break;
-                                case "B":
-
-                                    break;
-                                case "C":
-
-                                    break;
-                                case "D":
-
-                                    break;
-                                case "R":
-
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        while (option != "A" && option != "B" && option != "C" && option != "D" && option != "R");
-                        break;
-                }
+                    break;
+                default:
+                    break;
             }
 
+
+            
+        }
+
+        private static void GlobalSavingsMenu()
+        {
+
+            string option = null;
+
+            do
+            {
+                Console.WriteLine("Select action to do");
+                Console.WriteLine("A: Deposit \n" +
+                   "B: Withdrawl \n" +
+                   "C: Close + Report \n" +
+                   "D: Report Balance in USD \n" +
+                   "R: Return to Bank Menu \n");
+                option = Console.ReadLine();
+                option = option.ToUpper();
+            }
+            while (option != "A" && option != "B" && option != "C" && option != "D" && option != "R");
+            switch (option.ToUpper())
+                {
+                    case "A":
+                        
+                        break;
+                    case "B":
+
+                        break;
+                    case "C":
+
+                        break;
+                    case "D":
+
+                        break;
+                    case "R":
+                        BankMenu(savings, chequings, globalSavingsAccount);
+                        break;
+                    default:
+                        break;
+                }
+            
+        }
+
+        private static void CheckingMenu()
+        {
+
+            string option = null;
+
+            do
+            {
+                Console.WriteLine("Select action to do");
+                Console.WriteLine("A: Deposit \n" +
+                   "B: Withdrawl \n" +
+                   "C: Close + Report \n" +
+                   "R: Return to Bank Menu \n");
+                option = Console.ReadLine();
+                option = option.ToUpper();
+            }
+            while (option != "A" && option != "B" && option != "C" && option != "R");
+            switch (option.ToUpper())
+                {
+                    case "A":
+
+                        break;
+                    case "B":
+
+                        break;
+                    case "C":
+
+                        break;
+                    case "R":
+                        BankMenu(savings, chequings, globalSavingsAccount);
+                        break;
+                    default:
+                        break;
+
+                }
+            
+        }
+
+        private static void SavingsMenu()
+        {
+
+            string option = null;
+
+            do
+            {
+                Console.WriteLine("Select action to do");
+                Console.WriteLine("A: Deposit \n" +
+                   "B: Withdrawl \n" +
+                   "C: Close + Report \n" +
+                   "R: Return to Bank Menu \n");
+                option = Console.ReadLine();
+                option = option.ToUpper();
+            }
+            while (option != "A" && option != "B" && option != "C" && option != "R");
+            switch (option.ToUpper())
+                {
+                    case "A":
+
+                        break;
+                    case "B":
+
+                        break;
+                    case "C":
+
+                        break;
+                    case "D":
+
+                        break;
+                    case "R":
+                        BankMenu(savings, chequings, globalSavingsAccount);
+                        break;
+                    default:
+                        break;
+
+                }
+            
         }
     }
 }
-        /*
-             public static void BankMenu()
-             {
-                 string option = null;
-
-             }
-
-
-
-             private static void GlobalSavingsMenu(GlobalSavingsAccount globalSavingsAccount)
-             {
-
-                 string option = null;
-
-                 do
-                 {
-                     Console.WriteLine("Select action to do");
-                     Console.WriteLine("A: Deposit \n" +
-                        "B: Withdrawl \n" +
-                        "C: Close + Report \n" +
-                        "R: Return to Bank Menu \n");
-                     option = Console.ReadLine();
-                     switch (option.ToUpper())
-                     {
-                         case "A":
-
-                             break;
-                         case "B":
-
-                             break;
-                         case "C":
-
-                             break;
-                         case "D":
-
-                             break;
-                         case "R":
-                             BankMenu();
-                             break;
-                         default:
-                             break;
-                     }
-                 }
-                 while (option != "A" && option != "B" && option != "C" && option != "D" && option != "R");
-             }
-             private static void CheckingMenu(Chequings chequings)
-             {
-
-                 string option = null;
-
-                 do
-                 {
-                     Console.WriteLine("Select action to do");
-                     Console.WriteLine("A: Deposit \n" +
-                        "B: Withdrawl \n" +
-                        "C: Close + Report \n" +
-                        "R: Return to Bank Menu \n");
-                     option = Console.ReadLine();
-                     switch (option.ToUpper())
-                     {
-                         case "A":
-
-                             break;
-                         case "B":
-
-                             break;
-                         case "C":
-
-                             break;
-                         case "R":
-
-                             break;
-                         default:
-                             break;
-
-                     }
-                 }
-                 while (option != "A" && option != "B" && option != "C" && option != "R");
-             }
-
-             private static void SavingsMenu(Savings savings)
-             {
-
-                 string option = null;
-
-                 do
-                 {
-                     Console.WriteLine("Select action to do");
-                     Console.WriteLine("A: Deposit \n" +
-                        "B: Withdrawl \n" +
-                        "C: Close + Report \n" +
-                        "R: Return to Bank Menu \n");
-                     option = Console.ReadLine();
-                     switch (option.ToUpper())
-                     {
-                         case "A":
-
-                             break;
-                         case "B":
-
-                             break;
-                         case "C":
-
-                             break;
-                         case "D":
-
-                             break;
-                         case "R":
-
-                             break;
-                         default:
-                             break;
-
-                     }
-                 }
-                 while (option != "A" && option != "B" && option != "C" && option != "R");
-             }
-         }
         
-    }
-*/
+             
+
+
+
+            
+        
+    
+
