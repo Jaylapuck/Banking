@@ -21,7 +21,7 @@ namespace Banking
         public new void MakeWithdrawl(double withdrawl)
         {
         
-            if (base.balance - withdrawl <= 0)
+            if (base.balance - withdrawl < 0)
             {
                 base.serviceCharge += 15;
                 base.balance -= base.serviceCharge;
@@ -32,11 +32,11 @@ namespace Banking
             }
         }
 
-        public new void CloseAndReport()
+        public new string CloseAndReport()
         {
             double monthlyFee = 5 + (base.numberofWithdrawls * 0.10);
             base.serviceCharge += monthlyFee;
-            base.CloseAndReport();
+            return base.CloseAndReport();
         }
 
     }

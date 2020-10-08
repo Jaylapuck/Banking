@@ -67,12 +67,12 @@ namespace Banking
             stringBuilder.Append("New Balance: ");
             stringBuilder.Append(balance);
             stringBuilder.Append("\n");
-            stringBuilder.Append("Percentage Change from starting the current balances ");
+            stringBuilder.Append("Percentage Change from starting the current balances: ");
             double percentageChange = ((newBalance - startingBalance) / newBalance) * 100;
             stringBuilder.Append(percentageChange);
             stringBuilder.Append("\n");
             /*
-            stringBuilder.Appen("Details About the Calculated Intesrest: ");
+            stringBuilder.Append("Details About the Calculated Intesrest: ");
             stringBuilder.Append("\n");
             stringBuilder.Append("MontlyInterestRate: ");
             stringBuilder.Append(MonthlyInterestRate);

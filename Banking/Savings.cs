@@ -38,13 +38,13 @@ namespace Banking
             }
         }
 
-        public new void CloseAndReport()
+        public new string CloseAndReport()
         {
-            if (base.numberofWithdrawls >= 4)
+            if (base.numberofWithdrawls > 4)
             {
-                base.serviceCharge += (1 * (base.numberofWithdrawls - 3));
+                base.serviceCharge += (base.numberofWithdrawls - 4);
             }
-            base.CloseAndReport();
+            return base.CloseAndReport();
         }
     }
 }

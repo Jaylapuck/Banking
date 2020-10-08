@@ -54,7 +54,7 @@ namespace Banking
             }
 
 
-            
+
         }
 
         private static void GlobalSavingsMenu()
@@ -75,26 +75,30 @@ namespace Banking
             }
             while (option != "A" && option != "B" && option != "C" && option != "D" && option != "R");
             switch (option.ToUpper())
-                {
-                    case "A":
-                        
-                        break;
-                    case "B":
+            {
+                case "A":
+                    globalSavingsAccount.MakeDeposit(10.00);
+                    GlobalSavingsMenu();
+                    break;
+                case "B":
+                    globalSavingsAccount.MakeWithdrawl(5.00);
+                    GlobalSavingsMenu();
+                    break;
+                case "C":
+                    Console.WriteLine(globalSavingsAccount.CloseAndReport());
+                    GlobalSavingsMenu();
+                    break;
+                case "D":
+                    globalSavingsAccount.USvalue(0.75);
+                    GlobalSavingsMenu();
+                    break;
+                case "R":
+                    BankMenu(savings, chequings, globalSavingsAccount);
+                    break;
+                default:
+                    break;
+            }
 
-                        break;
-                    case "C":
-
-                        break;
-                    case "D":
-
-                        break;
-                    case "R":
-                        BankMenu(savings, chequings, globalSavingsAccount);
-                        break;
-                    default:
-                        break;
-                }
-            
         }
 
         private static void CheckingMenu()
@@ -114,24 +118,27 @@ namespace Banking
             }
             while (option != "A" && option != "B" && option != "C" && option != "R");
             switch (option.ToUpper())
-                {
-                    case "A":
+            {
+                case "A":
+                    chequings.MakeDeposit(20.00);
+                    CheckingMenu();
+                    break;
+                case "B":
+                    chequings.MakeWithdrawl(10.00);
+                    CheckingMenu();
+                    break;
+                case "C":
+                    Console.WriteLine(chequings.CloseAndReport());
+                    CheckingMenu();
+                    break;
+                case "R":
+                    BankMenu(savings, chequings, globalSavingsAccount);
+                    break;
+                default:
+                    break;
 
-                        break;
-                    case "B":
+            }
 
-                        break;
-                    case "C":
-
-                        break;
-                    case "R":
-                        BankMenu(savings, chequings, globalSavingsAccount);
-                        break;
-                    default:
-                        break;
-
-                }
-            
         }
 
         private static void SavingsMenu()
@@ -151,36 +158,36 @@ namespace Banking
             }
             while (option != "A" && option != "B" && option != "C" && option != "R");
             switch (option.ToUpper())
-                {
-                    case "A":
+            {
+                case "A":
+                    savings.MakeDeposit(15.00);
+                    SavingsMenu();
+                    break;
+                case "B":
+                    savings.MakeWithdrawl(10.00);
+                    SavingsMenu();
+                    break;
+                case "C":
+                    Console.WriteLine(savings.CloseAndReport());
+                    SavingsMenu();
+                    break;
+                case "R":
+                    BankMenu(savings, chequings, globalSavingsAccount);
+                    break;
+                default:
+                    break;
 
-                        break;
-                    case "B":
+            }
 
-                        break;
-                    case "C":
-
-                        break;
-                    case "D":
-
-                        break;
-                    case "R":
-                        BankMenu(savings, chequings, globalSavingsAccount);
-                        break;
-                    default:
-                        break;
-
-                }
-            
         }
     }
 }
-        
-             
 
 
 
-            
-        
-    
+
+
+
+
+
 
