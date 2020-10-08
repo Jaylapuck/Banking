@@ -59,7 +59,7 @@ namespace Banking
 
         private static void GlobalSavingsMenu()
         {
-
+            
             string option = null;
 
             do
@@ -77,11 +77,15 @@ namespace Banking
             switch (option.ToUpper())
             {
                 case "A":
-                    globalSavingsAccount.MakeDeposit(10.00);
+                    Console.WriteLine("Enter Desired Deposit Amount :" );
+                    double depositAmount = Convert.ToDouble(Console.ReadLine());
+                    globalSavingsAccount.MakeDeposit(depositAmount);
                     GlobalSavingsMenu();
                     break;
                 case "B":
-                    globalSavingsAccount.MakeWithdrawl(5.00);
+                    Console.WriteLine("Enter Desired Withdrawl Amount :");
+                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
+                    globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
                     GlobalSavingsMenu();
                     break;
                 case "C":
@@ -120,11 +124,16 @@ namespace Banking
             switch (option.ToUpper())
             {
                 case "A":
-                    chequings.MakeDeposit(20.00);
+                    Console.WriteLine("Enter Desired Deposit Amount :");
+                    double depositAmount = Convert.ToDouble(Console.ReadLine());
+                    chequings.MakeDeposit(depositAmount);
                     CheckingMenu();
                     break;
                 case "B":
-                    chequings.MakeWithdrawl(10.00);
+                    Console.WriteLine("Enter Desired Withdrawl Amount :");
+                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
+                    globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
+                    chequings.MakeWithdrawl(withdrawlAmount);
                     CheckingMenu();
                     break;
                 case "C":
@@ -160,11 +169,17 @@ namespace Banking
             switch (option.ToUpper())
             {
                 case "A":
-                    savings.MakeDeposit(15.00);
+                    Console.WriteLine("Enter Desired Deposit Amount :");
+                    double depositAmount = Convert.ToDouble(Console.ReadLine());
+                    chequings.MakeDeposit(depositAmount);
+                    savings.MakeDeposit(depositAmount);
                     SavingsMenu();
                     break;
                 case "B":
-                    savings.MakeWithdrawl(10.00);
+                    Console.WriteLine("Enter Desired Withdrawl Amount :");
+                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
+                    globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
+                    savings.MakeWithdrawl(withdrawlAmount);
                     SavingsMenu();
                     break;
                 case "C":
