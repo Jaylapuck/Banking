@@ -19,3 +19,10 @@ C:\Users\jc_be\source\repos\Banking\Banking\obj\Debug\Banking.csprojAssemblyRefe
 C:\Users\jc_be\source\repos\Banking\Banking\obj\Debug\Banking.csproj.CoreCompileInputs.cache
 C:\Users\jc_be\source\repos\Banking\Banking\obj\Debug\Banking.exe
 C:\Users\jc_be\source\repos\Banking\Banking\obj\Debug\Banking.pdb
+C:\Users\jorda\Source\Repos\Banking\Banking\bin\Debug\Banking.exe.config
+C:\Users\jorda\Source\Repos\Banking\Banking\bin\Debug\Banking.exe
+C:\Users\jorda\Source\Repos\Banking\Banking\bin\Debug\Banking.pdb
+C:\Users\jorda\Source\Repos\Banking\Banking\obj\Debug\Banking.csprojAssemblyReference.cache
+C:\Users\jorda\Source\Repos\Banking\Banking\obj\Debug\Banking.csproj.CoreCompileInputs.cache
+C:\Users\jorda\Source\Repos\Banking\Banking\obj\Debug\Banking.exe
+C:\Users\jorda\Source\Repos\Banking\Banking\obj\Debug\Banking.pdb
