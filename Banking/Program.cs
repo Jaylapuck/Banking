@@ -12,18 +12,20 @@ namespace Banking
         public static Savings savings = new Savings(5, 0.05);
         public static Chequings chequings = new Chequings(5, 0.5);
         public static GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
+        public static InputCoverter inputCoverter = new InputCoverter();
+        public static double input;
+        public static string output = "0";
+                    
         static void Main(string[] args)
         {
 
-            string option = null;
             BankMenu(savings, chequings, globalSavingsAccount);
         }
 
         public static void BankMenu(Savings savings, Chequings chequings, GlobalSavingsAccount globalSavingsAccount)
         {
             string option = null;
-            do
-            {
+
                 Console.WriteLine("Select the Type of Account");
                 Console.WriteLine("A: Savings \n" +
                     "B: Checking \n" +
@@ -32,8 +34,7 @@ namespace Banking
                 option = Console.ReadLine();
                 option = option.ToUpper();
 
-            }
-            while (option != "A" && option != "B" && option != "C" && option != "Q");
+
 
             switch (option.ToUpper())
             {
@@ -50,6 +51,8 @@ namespace Banking
 
                     break;
                 default:
+                    Console.WriteLine("NOT VALID OPTION");
+                    BankMenu(savings, chequings, globalSavingsAccount);
                     break;
             }
 
@@ -62,8 +65,7 @@ namespace Banking
             
             string option = null;
 
-            do
-            {
+
                 Console.WriteLine("Select action to do");
                 Console.WriteLine("A: Deposit \n" +
                    "B: Withdrawl \n" +
@@ -72,19 +74,23 @@ namespace Banking
                    "R: Return to Bank Menu \n");
                 option = Console.ReadLine();
                 option = option.ToUpper();
-            }
-            while (option != "A" && option != "B" && option != "C" && option != "D" && option != "R");
+         
+            
             switch (option.ToUpper())
             {
                 case "A":
                     Console.WriteLine("Enter Desired Deposit Amount :" );
-                    double depositAmount = Convert.ToDouble(Console.ReadLine());
+                    isNumber();
+                    double depositAmount;
+                    depositAmount = inputCoverter.ConvertedInputToNumeric(output);
                     globalSavingsAccount.MakeDeposit(depositAmount);
                     GlobalSavingsMenu();
                     break;
                 case "B":
                     Console.WriteLine("Enter Desired Withdrawl Amount :");
-                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
+                    isNumber();
+                    double withdrawlAmount;
+                    withdrawlAmount = inputCoverter.ConvertedInputToNumeric(output);
                     globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
                     GlobalSavingsMenu();
                     break;
@@ -100,6 +106,8 @@ namespace Banking
                     BankMenu(savings, chequings, globalSavingsAccount);
                     break;
                 default:
+                    Console.WriteLine("NOT VALID OPTION");
+                    GlobalSavingsMenu();
                     break;
             }
 
@@ -110,8 +118,7 @@ namespace Banking
 
             string option = null;
 
-            do
-            {
+       
                 Console.WriteLine("Select action to do");
                 Console.WriteLine("A: Deposit \n" +
                    "B: Withdrawl \n" +
@@ -119,20 +126,22 @@ namespace Banking
                    "R: Return to Bank Menu \n");
                 option = Console.ReadLine();
                 option = option.ToUpper();
-            }
-            while (option != "A" && option != "B" && option != "C" && option != "R");
+       
             switch (option.ToUpper())
             {
                 case "A":
                     Console.WriteLine("Enter Desired Deposit Amount :");
-                    double depositAmount = Convert.ToDouble(Console.ReadLine());
+                    isNumber();
+                    double depositAmount;
+                    depositAmount = inputCoverter.ConvertedInputToNumeric(output);
                     chequings.MakeDeposit(depositAmount);
                     CheckingMenu();
                     break;
                 case "B":
                     Console.WriteLine("Enter Desired Withdrawl Amount :");
-                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
-                    globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
+                    isNumber();
+                    double withdrawlAmount;
+                    withdrawlAmount = inputCoverter.ConvertedInputToNumeric(output);
                     chequings.MakeWithdrawl(withdrawlAmount);
                     CheckingMenu();
                     break;
@@ -144,6 +153,8 @@ namespace Banking
                     BankMenu(savings, chequings, globalSavingsAccount);
                     break;
                 default:
+                    Console.WriteLine("NOT VALID OPTION");
+                    CheckingMenu();
                     break;
 
             }
@@ -155,8 +166,6 @@ namespace Banking
 
             string option = null;
 
-            do
-            {
                 Console.WriteLine("Select action to do");
                 Console.WriteLine("A: Deposit \n" +
                    "B: Withdrawl \n" +
@@ -164,21 +173,23 @@ namespace Banking
                    "R: Return to Bank Menu \n");
                 option = Console.ReadLine();
                 option = option.ToUpper();
-            }
-            while (option != "A" && option != "B" && option != "C" && option != "R");
+            
+            
             switch (option.ToUpper())
             {
                 case "A":
                     Console.WriteLine("Enter Desired Deposit Amount :");
-                    double depositAmount = Convert.ToDouble(Console.ReadLine());
-                    chequings.MakeDeposit(depositAmount);
+                    isNumber();
+                    double depositAmount;
+                    depositAmount = inputCoverter.ConvertedInputToNumeric(output);
                     savings.MakeDeposit(depositAmount);
                     SavingsMenu();
                     break;
                 case "B":
                     Console.WriteLine("Enter Desired Withdrawl Amount :");
-                    double withdrawlAmount = Convert.ToDouble(Console.ReadLine());
-                    globalSavingsAccount.MakeWithdrawl(withdrawlAmount);
+                    isNumber();
+                    double withdrawlAmount;
+                    withdrawlAmount = inputCoverter.ConvertedInputToNumeric(output);
                     savings.MakeWithdrawl(withdrawlAmount);
                     SavingsMenu();
                     break;
@@ -190,10 +201,19 @@ namespace Banking
                     BankMenu(savings, chequings, globalSavingsAccount);
                     break;
                 default:
+                    Console.WriteLine("NOT VALID OPTION");
+                    SavingsMenu();
                     break;
 
             }
 
+        }
+
+        private static void isNumber()
+        {
+            while (!double.TryParse(Console.ReadLine(), out input))
+                Console.WriteLine("The value must be a number, please try again, try a number from 1 to 10 for example");
+            output = input.ToString();
         }
     }
 }

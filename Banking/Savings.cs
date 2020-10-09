@@ -9,32 +9,34 @@ namespace Banking
 {
     class Savings : Account
     {
+       protected internal static CurrentStatus status;
 
         public Savings(double balance, double annualInterestRate) : base(balance, annualInterestRate)
         {
-
+        
         }
-        public new void MakeDeposit(double deposit, CurrentStatus currentStatus)
+        public new void MakeDeposit(double deposit)
         {
-            if (currentStatus == CurrentStatus.inactive)
-            {
-                
-            }
-            else
-            {
-                base.MakeDeposit(deposit);
-            }
+            checkIfActive();
+            base.MakeDeposit(deposit);
+                   
         }
 
-        public new void MakeWithdrawl(double withdrawl, CurrentStatus currentStatus)
+        public new void MakeWithdrawl(double withdrawl)
         {
-            if (currentStatus == CurrentStatus.inactive && base.balance > 25)
+            checkIfActive();
+            if (status == CurrentStatus.inactive && base.balance > 25)
             {
-                currentStatus = CurrentStatus.active;
+                status = CurrentStatus.active;
+                base.MakeWithdrawl(withdrawl);
             }
-            else
+            else if (status == CurrentStatus.active)
             {
                 base.MakeWithdrawl(withdrawl);
+            }
+            else if (status == CurrentStatus.inactive)
+            {
+                Console.WriteLine("The ammount will make your account go into the negatives, DECLINED");
             }
         }
 
@@ -45,6 +47,18 @@ namespace Banking
                 base.serviceCharge += (base.numberofWithdrawls - 4);
             }
             return base.CloseAndReport();
+            
+        }
+        public void checkIfActive()
+        {
+            if (balance < 25)
+            {
+                status = CurrentStatus.inactive;
+            }
+            else
+            {
+                status = CurrentStatus.active;
+            }
         }
     }
 }
