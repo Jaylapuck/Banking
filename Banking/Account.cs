@@ -18,6 +18,9 @@ namespace Banking
         protected internal double annualInterestRates;
         protected internal double serviceCharge;
 
+        protected internal static double MonthlyInterestRate;
+        protected internal static double MonthlyInterest;
+
         protected internal enum CurrentStatus
         {
             active,
@@ -31,25 +34,28 @@ namespace Banking
         {
             this.balance = balance;
             this.annualInterestRates = annualInterestRates;
+            startingBalance = balance;
         }
        
         public void MakeDeposit(double deposit)
         {
             balance += deposit;
+            totalDeposits += deposit;
             numberOfDeposit++;
         }
 
         public void MakeWithdrawl(double withdrawl)
         {
             balance -= withdrawl;
+            totalWithdrawls += withdrawl;
             numberofWithdrawls++;
         }
 
         public void CalculateInterest()
         {
-            double MonthlyInterestRate = annualInterestRates / 12;
-            double MonthlyInterest = balance * MonthlyInterestRate;
-             balance += MonthlyInterest;
+              MonthlyInterestRate = annualInterestRates / 12;
+              MonthlyInterest = balance * MonthlyInterestRate;
+              balance += MonthlyInterest;
         }
 
         public string CloseAndReport()
@@ -57,30 +63,37 @@ namespace Banking
 
             double previousBalance = balance;
             double newBalance = (balance -= serviceCharge);
-            CalculateInterest();
             numberOfDeposit = 0;
             serviceCharge = 0;
+            CalculateInterest();
             StringBuilder stringBuilder = new StringBuilder();
+            //stringBuilder.Append("Starting Balance: ");
+            //stringBuilder.Append(startingBalance);
+            //stringBuilder.Append("\n");
             stringBuilder.Append("Previous Balance: ");
-            stringBuilder.Append(previousBalance);
+            stringBuilder.Append(startingBalance);
             stringBuilder.Append("\n");
-            stringBuilder.Append("New Balance: ");
-            stringBuilder.Append(balance);
+            stringBuilder.Append("Balance: ");
+            stringBuilder.Append(newBalance);
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
-            double percentageChange = ((newBalance - startingBalance) / newBalance) * 100;
+            double percentageChange = (newBalance / startingBalance) * 100;
             stringBuilder.Append(percentageChange);
+            stringBuilder.Append("%");
             stringBuilder.Append("\n");
-            /*
+            stringBuilder.Append("Service Charge: ");
+            stringBuilder.Append(serviceCharge);
+            stringBuilder.Append("\n\n");
             stringBuilder.Append("Details About the Calculated Intesrest: ");
             stringBuilder.Append("\n");
-            stringBuilder.Append("MontlyInterestRate: ");
-            stringBuilder.Append(MonthlyInterestRate);
-            stringBuilder.Append("\n");
+            stringBuilder.Append("MonthlyInterestRate: ");
+            stringBuilder.Append(MonthlyInterestRate * 100);
+            stringBuilder.Append("%\n");
             stringBuilder.Append("MontlyInterest: ");
             stringBuilder.Append(MonthlyInterest);
             stringBuilder.Append("\n");
-            */
+            startingBalance = newBalance;
+            
             string Report = stringBuilder.ToString();
 
             return Report;
