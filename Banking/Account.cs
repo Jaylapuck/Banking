@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExtensionClass;
+
 
 namespace Banking
 
 {
     internal abstract class Account : IAccount
     {
-        protected internal double startingBalance;
-        protected internal double balance;
+        protected static internal double startingBalance;
+        protected static internal double balance;
         protected internal double totalDeposits;
         protected internal int numberOfDeposit;
         protected internal double totalWithdrawls;
         protected internal int numberofWithdrawls;
         protected internal double annualInterestRates;
         protected internal double serviceCharge;
+        protected static internal double getPC = ExtensionClass.ExtensionClass.getPercentageChange(startingBalance, balance);
 
         protected internal static double MonthlyInterestRate;
         protected internal static double MonthlyInterest;
@@ -32,9 +35,9 @@ namespace Banking
 
         public Account(double balance, double annualInterestRates)
         {
-            this.balance = balance;
+            Account.balance = balance;
             this.annualInterestRates = annualInterestRates;
-            startingBalance = balance;
+            Account.startingBalance = balance;
         }
        
         public void MakeDeposit(double deposit)
@@ -60,7 +63,8 @@ namespace Banking
 
         public string CloseAndReport()
         {
-
+            
+            
             double previousBalance = balance;
             double newBalance = (balance -= serviceCharge);
             numberOfDeposit = 0;
@@ -77,8 +81,9 @@ namespace Banking
             stringBuilder.Append(newBalance);
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
-            double percentageChange = (newBalance / startingBalance) * 100;
-            stringBuilder.Append(percentageChange);
+            // double percentageChange = (newBalance / startingBalance) * 100;
+            //stringBuilder.Append(percentageChange);
+            stringBuilder.Append(getPC);
             stringBuilder.Append("%");
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: ");

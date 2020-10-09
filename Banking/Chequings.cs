@@ -21,7 +21,7 @@ namespace Banking
         public new void MakeWithdrawl(double withdrawl)
         {
         
-            if (base.balance - withdrawl < 0)
+            if (Account.balance - withdrawl < 0)
             {
                 base.serviceCharge += 15;
                 Console.WriteLine("Withdrawl DECLINED, insufficient funds, 15 serviceCharge taken");

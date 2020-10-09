@@ -25,7 +25,7 @@ namespace Banking
         public new void MakeWithdrawl(double withdrawl)
         {
             checkIfActive();
-            if (status == CurrentStatus.inactive && base.balance > 25)
+            if (status == CurrentStatus.inactive && Account.balance > 25)
             {
                 status = CurrentStatus.active;
                 base.MakeWithdrawl(withdrawl);
