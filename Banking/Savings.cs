@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Banking
 {
-    class Savings : Account
+    internal class Savings : Account
     {
-       protected internal static CurrentStatus status;
+        protected internal static CurrentStatus status;
 
         public Savings(double balance, double annualInterestRate) : base(balance, annualInterestRate)
         {
-        
         }
+
         public new void MakeDeposit(double deposit)
         {
-            checkIfActive();
+            CheckIfActive();
             base.MakeDeposit(deposit);
-                   
         }
 
         public new void MakeWithdrawl(double withdrawl)
         {
-            checkIfActive();
+            CheckIfActive();
             if (status == CurrentStatus.inactive && Account.balance > 25)
             {
                 status = CurrentStatus.active;
@@ -47,9 +41,9 @@ namespace Banking
                 base.serviceCharge += (base.numberofWithdrawls - 4);
             }
             return base.CloseAndReport();
-            
         }
-        public void checkIfActive()
+
+        public void CheckIfActive()
         {
             if (balance < 25)
             {

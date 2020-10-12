@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Banking
 {
-     internal class Chequings : Account
+    internal class Chequings : Account
     {
-        public Chequings(double balance, double annualInterestRate) : base(balance,annualInterestRate)
+        public Chequings(double balance, double annualInterestRate) : base(balance, annualInterestRate)
         {
-           
         }
+
         public new void MakeDeposit(double deposit)
         {
             base.MakeDeposit(deposit);
         }
-        
 
         public new void MakeWithdrawl(double withdrawl)
         {
-        
             if (Account.balance - withdrawl < 0)
             {
                 base.serviceCharge += 15;
@@ -38,6 +32,5 @@ namespace Banking
             base.serviceCharge += MonthlyInterest;
             return base.CloseAndReport();
         }
-
     }
 }

@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ExtensionClass;
 using System.Text;
-using System.Threading.Tasks;
-using ExtensionClass;
-
 
 namespace Banking
 
 {
     internal abstract class Account : IAccount
     {
-        protected static internal double startingBalance;
-        protected static internal double balance;
+        protected internal static double startingBalance;
+        protected internal static double balance;
         protected internal double totalDeposits;
         protected internal int numberOfDeposit;
         protected internal double totalWithdrawls;
         protected internal int numberofWithdrawls;
         protected internal double annualInterestRates;
         protected internal double serviceCharge;
-        protected static internal double getPC = ExtensionClass.ExtensionClass.getPercentageChange(startingBalance, balance);
 
         protected internal static double MonthlyInterestRate;
         protected internal static double MonthlyInterest;
@@ -39,7 +33,7 @@ namespace Banking
             this.annualInterestRates = annualInterestRates;
             Account.startingBalance = balance;
         }
-       
+
         public void MakeDeposit(double deposit)
         {
             balance += deposit;
@@ -56,15 +50,13 @@ namespace Banking
 
         public void CalculateInterest()
         {
-              MonthlyInterestRate = annualInterestRates / 12;
-              MonthlyInterest = balance * MonthlyInterestRate;
-              balance += MonthlyInterest;
+            MonthlyInterestRate = annualInterestRates / 12;
+            MonthlyInterest = balance * MonthlyInterestRate;
+            balance += MonthlyInterest;
         }
 
         public string CloseAndReport()
         {
-            
-            
             double previousBalance = balance;
             double newBalance = (balance -= serviceCharge);
             numberOfDeposit = 0;
@@ -81,9 +73,9 @@ namespace Banking
             stringBuilder.Append(newBalance);
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
-            // double percentageChange = (newBalance / startingBalance) * 100;
-            //stringBuilder.Append(percentageChange);
-            stringBuilder.Append(getPC);
+            double percentageChange = (newBalance - startingBalance) / startingBalance * 100;
+            percentageChange.GetPercentageChange();
+            stringBuilder.Append(percentageChange);
             stringBuilder.Append("%");
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: ");
@@ -97,8 +89,7 @@ namespace Banking
             stringBuilder.Append("MontlyInterest: ");
             stringBuilder.Append(MonthlyInterest);
             stringBuilder.Append("\n");
-            startingBalance = newBalance;
-            
+
             string Report = stringBuilder.ToString();
 
             return Report;
