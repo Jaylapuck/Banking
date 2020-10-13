@@ -5,10 +5,11 @@ namespace Banking
 {
     internal class Savings : Account
     {
-        protected internal static CurrentStatus status;
+        protected internal CurrentStatus status;
 
         public Savings(double balance, double annualInterestRate) : base(balance, annualInterestRate)
         {
+            CheckIfActive();
         }
 
         public new void MakeDeposit(double deposit)
@@ -40,10 +41,12 @@ namespace Banking
 
         public new string CloseAndReport()
         {
+            CheckIfActive();
             if (base.numberofWithdrawls > 4)
             {
                 base.serviceCharge = (base.numberofWithdrawls - 4);
             }
+            Console.WriteLine("Account Status : " + status);
             return base.CloseAndReport();
         }
 
