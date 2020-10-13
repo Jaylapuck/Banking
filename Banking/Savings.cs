@@ -14,25 +14,27 @@ namespace Banking
         public new void MakeDeposit(double deposit)
         {
             CheckIfActive();
-            base.MakeDeposit(deposit);
+            if (status == CurrentStatus.inactive && base.balance > 25)
+            {
+                status = CurrentStatus.active;
+                base.MakeDeposit(deposit);
+            }
+            else
+            {
+                base.MakeDeposit(deposit);
+            }
         }
 
         public new void MakeWithdrawl(double withdrawl)
         {
             CheckIfActive();
-            if (status == CurrentStatus.inactive && Account.balance > 25)
-            {
-                status = CurrentStatus.active;
-                base.MakeWithdrawl(withdrawl);
-            }
-            else if (status == CurrentStatus.active)
+            if (status == CurrentStatus.active)
             {
                 base.MakeWithdrawl(withdrawl);
             }
             else if (status == CurrentStatus.inactive)
             {
-                Console.WriteLine("The ammount will make your account go into the negatives");
-                base.MakeWithdrawl(withdrawl);
+                Console.WriteLine("Withdrawl denied, balance is under 25");
             }
         }
 
@@ -40,14 +42,14 @@ namespace Banking
         {
             if (base.numberofWithdrawls > 4)
             {
-                base.serviceCharge += (base.numberofWithdrawls - 4);
+                base.serviceCharge = (base.numberofWithdrawls - 4);
             }
             return base.CloseAndReport();
         }
 
         public void CheckIfActive()
         {
-            if (balance < 25)
+            if (base.balance < 25)
             {
                 status = CurrentStatus.inactive;
             }

@@ -1,4 +1,7 @@
-﻿namespace Banking
+﻿using ExtensionClass;
+using System;
+
+namespace Banking
 {
     internal class GlobalSavingsAccount : Savings, IExchangable
     {
@@ -8,7 +11,10 @@
 
         public double USvalue(double usRates)
         {
-            return base.Balance * usRates;
+            double value = base.Balance * usRates;
+            value = Math.Round(value, 2);
+
+            return value;
         }
     }
 }
