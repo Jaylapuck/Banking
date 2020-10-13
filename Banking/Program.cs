@@ -5,7 +5,7 @@ namespace Banking
     internal class Program
     {
         public static Savings savings = new Savings(5, 0.05);
-        public static Chequings chequings = new Chequings(5, 0.5);
+        public static Chequings chequings = new Chequings(5, 0.05);
         public static GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
         public static InputCoverter inputCoverter = new InputCoverter();
         public static double input;
@@ -89,8 +89,9 @@ namespace Banking
                     break;
 
                 case "D":
-                    globalSavingsAccount.USvalue(0.75);
+                    Console.WriteLine("US value: " + globalSavingsAccount.USvalue(0.75) + "\n");
                     GlobalSavingsMenu();
+
                     break;
 
                 case "R":

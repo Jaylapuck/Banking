@@ -6,8 +6,8 @@ namespace Banking
 {
     internal abstract class Account : IAccount
     {
-        protected internal static double startingBalance;
-        protected internal static double balance;
+        protected internal double startingBalance;
+        protected internal double balance;
         protected internal double totalDeposits;
         protected internal int numberOfDeposit;
         protected internal double totalWithdrawls;
@@ -29,9 +29,9 @@ namespace Banking
 
         public Account(double balance, double annualInterestRates)
         {
-            Account.balance = balance;
             this.annualInterestRates = annualInterestRates;
-            Account.startingBalance = balance;
+            this.startingBalance = balance;
+            this.balance = balance;
         }
 
         public void MakeDeposit(double deposit)
@@ -60,9 +60,7 @@ namespace Banking
             //Reset and Calculate
             CalculateInterest();
             double newBalance = (balance -= serviceCharge);
-            numberOfDeposit = 0;
-            serviceCharge = 0;
-            double valueChange = ((newBalance / startingBalance) * 100) - 100;
+            double valueChange = ((newBalance - startingBalance) / startingBalance);
 
             //stringbuilder a report then send toString()
             StringBuilder stringBuilder = new StringBuilder();
@@ -74,20 +72,24 @@ namespace Banking
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
             stringBuilder.Append(valueChange.GetPercentageChange());
-            stringBuilder.Append("%");
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: ");
             stringBuilder.Append(serviceCharge.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
             stringBuilder.Append("\n");
             stringBuilder.Append("MonthlyInterestRate: ");
-            stringBuilder.Append(MonthlyInterestRate * 100);
-            stringBuilder.Append("%\n");
+            string changeFormat = string.Format("{0:0.00}%", MonthlyInterestRate * 100);
+            stringBuilder.Append(changeFormat);
+            stringBuilder.Append("\n");
             stringBuilder.Append("MontlyInterest: ");
             stringBuilder.Append(MonthlyInterest.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
 
             string Report = stringBuilder.ToString();
+
+            numberofWithdrawls = 0;
+            numberOfDeposit = 0;
+            serviceCharge = 0;
 
             return Report;
         }

@@ -7,9 +7,8 @@ namespace ExtensionClass
     {
         public static string GetPercentageChange(this double value)
         {
-            string str;
-            str = string.Format("{0:0.00}", value);
-            return str;
+            value *= 100;
+            return string.Format("{0:0.00}%", value);
         }
 
         public static string ToNaMoneyFormat(this double value, bool round)
@@ -19,12 +18,12 @@ namespace ExtensionClass
             switch (round)
             {
                 case true:
-                    moneyValueRounded = Math.Ceiling(value);
+                    moneyValueRounded = Math.Ceiling(value * 100) / 100;
                     valueChanged = ValueUnderOrOver(moneyValueRounded);
                     break;
 
                 case false:
-                    moneyValueRounded = Math.Floor(value);
+                    moneyValueRounded = Math.Floor(value * 100) / 100;
                     valueChanged = ValueUnderOrOver(moneyValueRounded);
                     break;
 
