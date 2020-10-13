@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ExtensionClass;
 
 namespace Banking
 {
@@ -15,6 +17,7 @@ namespace Banking
         public new void MakeDeposit(double deposit)
         {
             base.MakeDeposit(deposit);
+            
         }
         
 
@@ -37,7 +40,9 @@ namespace Banking
             double monthlyFee = 5 + (base.numberofWithdrawls * 0.10);
             base.serviceCharge += MonthlyInterest;
             return base.CloseAndReport();
-        }
 
+           
+        }
+        g
     }
 }

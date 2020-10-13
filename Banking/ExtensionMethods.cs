@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ExtensionClass
 {
-    public static class ExtensionClass
+    public static class ExtensionMethods
     {
 
-        public static string getPercentageChange(double startingBalance, double currentBalance)
+        public static string getPercentageChange()
         {    
            double  pst = ((currentBalance / startingBalance) * 100);
             string str = String.Format("{0:0.00}", pst);

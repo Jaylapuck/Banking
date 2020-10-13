@@ -19,16 +19,21 @@ namespace Banking
         protected internal int numberofWithdrawls;
         protected internal double annualInterestRates;
         protected internal double serviceCharge;
-        protected static internal double getPC = ExtensionClass.ExtensionClass.getPercentageChange(startingBalance, balance);
+        
 
         protected internal static double MonthlyInterestRate;
         protected internal static double MonthlyInterest;
+
+
+        Chequings a = new Chequings(10, 10);
+        
 
         protected internal enum CurrentStatus
         {
             active,
             inactive
         }
+        
 
         public double StartingBalance { get { return startingBalance; } }
         public double Balance { get { return balance; } }
@@ -83,7 +88,7 @@ namespace Banking
             stringBuilder.Append("Percentage Change from starting the current balances: ");
             // double percentageChange = (newBalance / startingBalance) * 100;
             //stringBuilder.Append(percentageChange);
-            stringBuilder.Append(getPC);
+
             stringBuilder.Append("%");
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: ");
