@@ -1,20 +1,53 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 
 namespace ExtensionClass
 {
     public static class ExtensionClass
     {
-        public static string GetPercentageChange(this double percentage)
+        public static string GetPercentageChange(this double value)
         {
-            string str = String.Format("0:0.00%");
+            string str;
+            str = string.Format("{0:0.00}", value);
             return str;
         }
 
-        public static string ToNaMoneyFormat(this bool roundUp, bool roundDown)
+        public static string ToNaMoneyFormat(this double value, bool round)
         {
-            double moneyValue = 0;
-            double moneyValueRounded = Math.Round(moneyValue);
-            string formattedMoney = string.Format("${0:0.00}", moneyValueRounded);
+            double moneyValueRounded = 0;
+            string valueChanged;
+            switch (round)
+            {
+                case true:
+                    moneyValueRounded = Math.Ceiling(value);
+                    valueChanged = ValueUnderOrOver(moneyValueRounded);
+                    break;
+
+                case false:
+                    moneyValueRounded = Math.Floor(value);
+                    valueChanged = ValueUnderOrOver(moneyValueRounded);
+                    break;
+
+                default:
+                    valueChanged = "An error just occured. not a double";
+                    break;
+            }
+
+            return valueChanged;
+        }
+
+        public static string ValueUnderOrOver(double value)
+        {
+            string formattedMoney = null;
+            if (value < 0)
+            {
+                value *= -1;
+                formattedMoney = string.Format("(${0:0.00})", value);
+            }
+            else if (value > 0)
+            {
+                formattedMoney = string.Format("${0:0.00}", value);
+            }
             return formattedMoney;
         }
     }

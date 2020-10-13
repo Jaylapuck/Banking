@@ -1,4 +1,5 @@
 ﻿using System;
+using ExtensionClass;
 
 namespace Banking
 {
@@ -30,7 +31,8 @@ namespace Banking
             }
             else if (status == CurrentStatus.inactive)
             {
-                Console.WriteLine("The ammount will make your account go into the negatives, DECLINED");
+                Console.WriteLine("The ammount will make your account go into the negatives");
+                base.MakeWithdrawl(withdrawl);
             }
         }
 

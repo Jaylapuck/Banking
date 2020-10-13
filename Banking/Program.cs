@@ -111,7 +111,7 @@ namespace Banking
                "B: Withdrawl \n" +
                "C: Close + Report \n" +
                "R: Return to Bank Menu \n");
-            string option = Console.ReadLine();
+            option = Console.ReadLine();
             option = option.ToUpper();
 
             switch (option.ToUpper())

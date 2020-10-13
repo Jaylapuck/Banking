@@ -57,37 +57,34 @@ namespace Banking
 
         public string CloseAndReport()
         {
-            double previousBalance = balance;
+            //Reset and Calculate
+            CalculateInterest();
             double newBalance = (balance -= serviceCharge);
             numberOfDeposit = 0;
             serviceCharge = 0;
-            CalculateInterest();
+            double valueChange = ((newBalance / startingBalance) * 100) - 100;
+
+            //stringbuilder a report then send toString()
             StringBuilder stringBuilder = new StringBuilder();
-            //stringBuilder.Append("Starting Balance: ");
-            //stringBuilder.Append(startingBalance);
-            //stringBuilder.Append("\n");
             stringBuilder.Append("Previous Balance: ");
-            stringBuilder.Append(startingBalance);
+            stringBuilder.Append(startingBalance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
             stringBuilder.Append("Balance: ");
-            stringBuilder.Append(newBalance);
+            stringBuilder.Append(newBalance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
-            double percentageChange = (newBalance - startingBalance) / startingBalance * 100;
-            percentageChange.GetPercentageChange();
-            stringBuilder.Append(percentageChange);
+            stringBuilder.Append(valueChange.GetPercentageChange());
             stringBuilder.Append("%");
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: ");
-            stringBuilder.Append(serviceCharge);
-            stringBuilder.Append("\n\n");
-            stringBuilder.Append("Details About the Calculated Intesrest: ");
+            stringBuilder.Append(serviceCharge.ToNaMoneyFormat(true));
+            stringBuilder.Append("\n");
             stringBuilder.Append("\n");
             stringBuilder.Append("MonthlyInterestRate: ");
             stringBuilder.Append(MonthlyInterestRate * 100);
             stringBuilder.Append("%\n");
             stringBuilder.Append("MontlyInterest: ");
-            stringBuilder.Append(MonthlyInterest);
+            stringBuilder.Append(MonthlyInterest.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
 
             string Report = stringBuilder.ToString();
