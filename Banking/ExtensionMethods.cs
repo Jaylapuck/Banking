@@ -1,20 +1,19 @@
-﻿using Microsoft.Win32;
+﻿using Banking;
+using Microsoft.Win32;
 using System;
 
 namespace ExtensionClass
 {
     public static class ExtensionClass
     {
-        public static string GetPercentageChange(this double value)
+        public static string GetPercentageChange(this Account ac)
         {
-            value *= 100;
-            return string.Format("{0:0.00}%", value);
         }
 
         public static string ToNaMoneyFormat(this double value, bool round)
         {
-            double moneyValueRounded = 0;
             string valueChanged;
+            double moneyValueRounded;
             switch (round)
             {
                 case true:

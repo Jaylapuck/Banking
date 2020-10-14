@@ -1,11 +1,10 @@
 ﻿using System;
-using ExtensionClass;
 
 namespace Banking
 {
     internal class Savings : Account
     {
-        protected internal CurrentStatus status;
+        private CurrentStatus status;
 
         public Savings(double balance, double annualInterestRate) : base(balance, annualInterestRate)
         {

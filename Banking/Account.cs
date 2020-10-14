@@ -6,18 +6,20 @@ namespace Banking
 {
     internal abstract class Account : IAccount
     {
-        protected internal double startingBalance;
+        private double startingBalance;
         protected internal double balance;
-        protected internal double newBalance;
-        protected internal double totalDeposits;
-        protected internal int numberOfDeposit;
-        protected internal double totalWithdrawls;
+        private double newBalance;
+        private double totalDeposits;
+        private int numberOfDeposit;
+        private double totalWithdrawls;
         protected internal int numberofWithdrawls;
-        protected internal double annualInterestRates;
+        private readonly double annualInterestRates;
         protected internal double serviceCharge;
 
-        protected internal double MonthlyInterestRate;
-        protected internal double MonthlyInterest;
+        //CalculateInterest() and CloseAndReport()
+        private double MonthlyInterestRate;
+
+        private double MonthlyInterest;
 
         protected internal enum CurrentStatus
         {
@@ -57,7 +59,7 @@ namespace Banking
 
         public string CloseAndReport()
         {
-            //Calculate
+            //Calculate and calling methods
             newBalance = startingBalance + balance;
             CalculateInterest();
             newBalance -= serviceCharge;
@@ -66,39 +68,30 @@ namespace Banking
 
             //stringbuilder a report then send toString()
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Starting Balance: ");
-            stringBuilder.Append(startingBalance.ToNaMoneyFormat(true));
+            stringBuilder.Append("Starting Balance: " + startingBalance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("Current Balance: ");
-            stringBuilder.Append(balance.ToNaMoneyFormat(true));
+            stringBuilder.Append("Current Balance: +" + balance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("New Starting Balance: ");
-            stringBuilder.Append(newBalance.ToNaMoneyFormat(true));
+            stringBuilder.Append("MontlyInterest: +" + MonthlyInterest.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("Total amount of deposits: ");
-            stringBuilder.Append(numberOfDeposit);
+            stringBuilder.Append("Service Charge: -" + serviceCharge.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("Total amount of Withdrawls: ");
-            stringBuilder.Append(numberofWithdrawls);
+            stringBuilder.Append("New Starting Balance: " + newBalance.ToNaMoneyFormat(true));
+            stringBuilder.Append("\n\n");
+            stringBuilder.Append("Total amount of deposits: " + numberOfDeposit);
+            stringBuilder.Append("\n");
+            stringBuilder.Append("Total amount of Withdrawls: " + numberofWithdrawls);
             stringBuilder.Append("\n");
             stringBuilder.Append("Percentage Change from starting the current balances: ");
-            stringBuilder.Append(valueChange.GetPercentageChange());
+
             stringBuilder.Append("\n");
-            stringBuilder.Append("Service Charge: ");
-            stringBuilder.Append(serviceCharge.ToNaMoneyFormat(true));
-            stringBuilder.Append("\n");
-            stringBuilder.Append("\n");
-            stringBuilder.Append("MonthlyInterestRate: ");
-            string changeFormat = string.Format("{0:0.00}%", MonthlyInterestRate * 100);
-            stringBuilder.Append(changeFormat);
-            stringBuilder.Append("\n");
-            stringBuilder.Append("MontlyInterest: ");
-            stringBuilder.Append(MonthlyInterest.ToNaMoneyFormat(true));
+
+            stringBuilder.Append("MonthlyInterestRate: " + string.Format("{0:0.00}%", MonthlyInterestRate * 100));
             stringBuilder.Append("\n");
 
             string Report = stringBuilder.ToString();
 
-            //Reset
+            //Reset Values
             numberofWithdrawls = 0;
             numberOfDeposit = 0;
             serviceCharge = 0;
