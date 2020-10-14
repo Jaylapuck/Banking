@@ -6,8 +6,11 @@ namespace ExtensionClass
 {
     public static class ExtensionClass
     {
-        public static string GetPercentageChange(this Account ac)
+        internal static string GetPercentageChange(this Account ac)
         {
+            double percentageChange = ((ac.balance - ac.StartingBalance) / ac.StartingBalance) * 100;
+
+            return percentageChange.ToString();
         }
 
         public static string ToNaMoneyFormat(this double value, bool round)

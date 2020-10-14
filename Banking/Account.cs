@@ -6,9 +6,8 @@ namespace Banking
 {
     internal abstract class Account : IAccount
     {
-        private double startingBalance;
+        protected internal double startingBalance;
         protected internal double balance;
-        private double newBalance;
         private double totalDeposits;
         private int numberOfDeposit;
         private double totalWithdrawls;
@@ -34,6 +33,7 @@ namespace Banking
         {
             this.annualInterestRates = annualInterestRates;
             this.startingBalance = balance;
+            this.balance += balance;
         }
 
         public void MakeDeposit(double deposit)
@@ -52,41 +52,43 @@ namespace Banking
 
         public void CalculateInterest()
         {
-            MonthlyInterestRate = annualInterestRates / 12;
-            MonthlyInterest = newBalance * MonthlyInterestRate;
-            newBalance += MonthlyInterest;
+            if (balance > 0)
+            {
+                MonthlyInterestRate = annualInterestRates / 12;
+                MonthlyInterest = balance * MonthlyInterestRate;
+                balance += MonthlyInterest;
+            }
+            else
+            {
+                MonthlyInterest = 0;
+            }
         }
 
         public string CloseAndReport()
         {
             //Calculate and calling methods
-            newBalance = startingBalance + balance;
+            balance -= serviceCharge;
             CalculateInterest();
-            newBalance -= serviceCharge;
-
-            double valueChange = ((newBalance - startingBalance) / startingBalance);
 
             //stringbuilder a report then send toString()
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("Starting Balance: " + startingBalance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("Current Balance: +" + balance.ToNaMoneyFormat(true));
-            stringBuilder.Append("\n");
             stringBuilder.Append("MontlyInterest: +" + MonthlyInterest.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
             stringBuilder.Append("Service Charge: -" + serviceCharge.ToNaMoneyFormat(true));
             stringBuilder.Append("\n");
-            stringBuilder.Append("New Starting Balance: " + newBalance.ToNaMoneyFormat(true));
+            stringBuilder.Append("New Starting Balance: " + balance.ToNaMoneyFormat(true));
             stringBuilder.Append("\n\n");
+            stringBuilder.Append("Total amount of cumulative deposits: " + totalDeposits.ToNaMoneyFormat(true));
+            stringBuilder.Append("\n");
+            stringBuilder.Append("Total amount of cumulative Withdrawls: " + totalWithdrawls.ToNaMoneyFormat(true));
+            stringBuilder.Append("\n");
             stringBuilder.Append("Total amount of deposits: " + numberOfDeposit);
             stringBuilder.Append("\n");
             stringBuilder.Append("Total amount of Withdrawls: " + numberofWithdrawls);
             stringBuilder.Append("\n");
-            stringBuilder.Append("Percentage Change from starting the current balances: ");
-
-            stringBuilder.Append("\n");
-
-            stringBuilder.Append("MonthlyInterestRate: " + string.Format("{0:0.00}%", MonthlyInterestRate * 100));
+            stringBuilder.Append("Monthly Interest Rate: " + string.Format("{0:0.00}%", MonthlyInterestRate * 100));
             stringBuilder.Append("\n");
 
             string Report = stringBuilder.ToString();
@@ -95,8 +97,7 @@ namespace Banking
             numberofWithdrawls = 0;
             numberOfDeposit = 0;
             serviceCharge = 0;
-            balance = 0;
-            startingBalance = newBalance;
+            startingBalance = balance;
 
             return Report;
         }

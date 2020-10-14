@@ -51,6 +51,7 @@ namespace Banking
 
         public void CheckIfActive()
         {
+            double balance = base.balance;
             if (base.balance < 25)
             {
                 status = CurrentStatus.inactive;

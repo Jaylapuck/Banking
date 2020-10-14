@@ -1,4 +1,5 @@
 ﻿using System;
+using ExtensionClass;
 
 namespace Banking
 {
@@ -39,6 +40,7 @@ namespace Banking
 
                 case "C":
                     GlobalSavingsMenu();
+
                     break;
 
                 case "Q":
@@ -46,7 +48,7 @@ namespace Banking
                     break;
 
                 default:
-                    Console.WriteLine("NOT VALID OPTION");
+                    Console.WriteLine("NOT A VALID OPTION");
                     BankMenu(savings, chequings, globalSavingsAccount);
                     break;
             }
@@ -89,6 +91,7 @@ namespace Banking
                     break;
 
                 case "D":
+                    Console.WriteLine("Percentage Change: " + globalSavingsAccount.GetPercentageChange() + "%");
                     Console.WriteLine("US value: " + globalSavingsAccount.USvalue(0.75) + "\n");
                     GlobalSavingsMenu();
 
@@ -136,6 +139,7 @@ namespace Banking
                     break;
 
                 case "C":
+                    Console.WriteLine("Percentage Change: " + chequings.GetPercentageChange() + "%");
                     Console.WriteLine(chequings.CloseAndReport());
                     CheckingMenu();
                     break;
@@ -182,6 +186,7 @@ namespace Banking
                     break;
 
                 case "C":
+                    Console.WriteLine("Percentage Change: " + savings.GetPercentageChange() + "%");
                     Console.WriteLine(savings.CloseAndReport());
                     SavingsMenu();
                     break;
