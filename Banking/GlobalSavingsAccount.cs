@@ -1,5 +1,4 @@
-﻿using ExtensionClass;
-using System;
+﻿using System;
 
 namespace Banking
 {
@@ -13,7 +12,6 @@ namespace Banking
         {
             double value = base.Balance * usRates;
             value = Math.Round(value, 2);
-
             return value;
         }
     }

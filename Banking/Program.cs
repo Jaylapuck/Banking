@@ -4,20 +4,20 @@ namespace Banking
 {
     internal class Program
     {
-        public static Savings savings = new Savings(5, 0.05);
-        public static Chequings chequings = new Chequings(5, 0.05);
-        public static GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
-        public static InputCoverter inputCoverter = new InputCoverter();
-        public static double input;
-        public static string output = "0";
-        public static string option;
+        private static Savings savings = new Savings(5, 0.05);
+        private static Chequings chequings = new Chequings(5, 0.05);
+        private static GlobalSavingsAccount globalSavingsAccount = new GlobalSavingsAccount(5, 0.05);
+        private static InputCoverter inputCoverter = new InputCoverter();
+        private static double input;
+        private static string output = "0";
+        private static string option;
 
         private static void Main(string[] args)
         {
             BankMenu(savings, chequings, globalSavingsAccount);
         }
 
-        public static void BankMenu(Savings savings, Chequings chequings, GlobalSavingsAccount globalSavingsAccount)
+        private static void BankMenu(Savings savings, Chequings chequings, GlobalSavingsAccount globalSavingsAccount)
         {
             Console.WriteLine("Select the Type of Account");
             Console.WriteLine("A: Savings \n" +
