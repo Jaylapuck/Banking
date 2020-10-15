@@ -10,7 +10,9 @@ namespace ExtensionClass
         {
             double percentageChange = ((ac.balance - ac.StartingBalance) / ac.StartingBalance) * 100;
 
-            return percentageChange.ToString();
+            string newPercentage = percentageChange.ToString();
+
+            return newPercentage;
         }
 
         public static string ToNaMoneyFormat(this double value, bool round)

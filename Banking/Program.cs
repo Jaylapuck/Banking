@@ -86,12 +86,13 @@ namespace Banking
                     break;
 
                 case "C":
+                    Console.WriteLine("Percentage Change: " + globalSavingsAccount.GetPercentageChange() + "%");
                     Console.WriteLine(globalSavingsAccount.CloseAndReport());
                     GlobalSavingsMenu();
                     break;
 
                 case "D":
-                    Console.WriteLine("Percentage Change: " + globalSavingsAccount.GetPercentageChange() + "%");
+                   
                     Console.WriteLine("US value: " + globalSavingsAccount.USvalue(0.75) + "\n");
                     GlobalSavingsMenu();
 
